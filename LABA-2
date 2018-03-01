@@ -1,0 +1,69 @@
+Zadanie #1
+
+#include <iostream>
+using namespace std;
+
+
+
+struct date
+{
+	int day;
+	int month;
+	int year;
+};
+struct statementOfExam
+{
+	char subject[25];
+	int NumOfGroup;
+	date *dayOfExam;
+};
+
+struct student
+{
+	char surname[20];
+	int numberOfExamList;
+	int examMark;
+};
+
+student input_student()
+{
+	student s;
+	cout << "Input surname "; cin >> s.surname; cout << endl;
+	cout << "Input Number of Exam list "; cin >> s.numberOfExamList; cout << endl;
+	cout << "Input exam Mark "; cin >> s.examMark; cout << endl;
+	return s;
+}
+
+statementOfExam input_dataOfStatementOfExam()
+{
+	statementOfExam st;
+	cout << "Input subject "; cin >> st.subject; cout << endl;
+	cout << "Input num Of group "; cin >> st.NumOfGroup; cout << endl;
+	cout << "Input date of Exam "; cin >> st.dayOfExam->day; cout << endl;
+	return st;
+}
+
+void output_dataOFstudents(student f)
+{
+	cout << "surname: " << f.surname << endl;
+	cout << "nubmer of examlist: " << f.numberOfExamList << endl;
+	cout << "exam mark: " << f.examMark << endl;
+}
+
+
+int main()
+{
+	student *stud;
+	stud = &(input_student());
+
+	output_dataOFstudents(*stud);
+
+	date dt;
+	dt.day = 5;
+	dt.month = 6;
+	dt.year = 2018;
+
+	system("pause");
+	return 0;
+}
+
