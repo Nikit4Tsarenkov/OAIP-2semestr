@@ -67,3 +67,52 @@ int main()
 	return 0;
 }
 
+Zadanie #2
+
+#include <iostream>
+using namespace std;
+
+struct complex
+{
+	float re;
+	float im;
+};
+
+complex read()
+{
+	complex a;
+	cout << "Input Real part : "; cin >> a.re; cout << endl;
+	cout << "Input Imagine part : "; cin >> a.im; cout << endl;
+	return a;
+}
+
+void print(complex cmp)
+{
+	char sign = '+';
+	if (cmp.im < 0) sign = '-';
+	cout << "Complex number: Z=" << cmp.re << sign << abs(cmp.im) << 'i' << endl;
+}
+
+void add(complex a, complex b)
+{
+	float sum_re, sum_im;
+	sum_re = (a.re + b.re); sum_im = (a.im + b.im);
+	char sign = '+';
+	if (sum_im < 0) sign = ' ';
+	cout << "Sum = " << sum_re << sign << sum_im << 'i' << endl;
+}
+
+
+int main()
+{
+	complex a, b;
+	a = read();
+	b = read();
+	print(a);
+	print(b);
+	add(a, b);
+
+
+	system("pause");
+	return 0;
+}
