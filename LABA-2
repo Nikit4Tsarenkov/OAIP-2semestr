@@ -116,3 +116,73 @@ int main()
 	system("pause");
 	return 0;
 }
+
+
+Zadanie #3
+
+
+#include <iostream>
+using namespace std;
+
+struct Perfomance {
+	int mark;
+};
+
+struct Student {
+	char surname[15];
+	char name[15];
+	char patronymic[15];
+	int age;
+	int degree;
+	Perfomance marks[3];
+};
+
+void input(Student*student, int n) {
+		for (int i = 0; i < n; i++) {
+			cout << "Student #" << i + 1 << " : " << endl;
+			cout << "  -Input surname of student : "; cin >> student[i].surname;
+			cout << "  -Input name of student : "; cin >> student[i].name;
+			cout << "  -Input patronymic of student : "; cin >> student[i].patronymic;
+			cout << "  -Input the age of " << student[i].surname <<" "<< student[i].name<<" "<< student[i].patronymic << " : "; cin >> student[i].age;
+			cout << "  -Input the number of degree for " << student[i].surname << " " << student[i].name << " " << student[i].patronymic << " : "; cin >> student[i].degree;
+			cout << "  -Input the marks of " << student[i].surname << " " << student[i].name << " " << student[i].patronymic << endl;
+			for (int k = 0; k < 3; k++) {
+				cout << k+1 << " mark : "; cin >> student[i].marks[k].mark;
+			}
+		}
+};
+
+double averageMark(Student*student, int n,int course) {
+	
+	double averageAnswer=0;
+	int k = 0;
+	
+	for (int i = 0; i < n; i++) {
+		double averageSum = 0;
+		if (student[i].degree == course) {
+			k++;
+			for (int k = 0; k < 3; k++) { averageSum += student[i].marks[k].mark; }
+			averageSum /= 3.0;
+		}
+		averageAnswer += averageSum;
+	}
+	if (k==0) { return averageAnswer; }
+		averageAnswer /= k;
+		return averageAnswer;
+}
+
+int main() {
+	int n;
+	cout << "Input cout of students : "; cin >> n;
+	Student*student;
+	student = new Student[n];
+
+	input(student, n);
+
+	int course;
+	cout << "Input the number of degree to find average mark : "; cin >> course;
+	if (averageMark(student, n, course) == 0) cout << "No students on this degree ." << endl; 
+	else { cout << "Average mark for students of " << course << " course = " << averageMark(student, n, course) << endl; }
+	system("pause");
+	return 0;
+}
