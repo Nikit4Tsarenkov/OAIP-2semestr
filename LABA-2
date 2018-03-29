@@ -124,65 +124,117 @@ Zadanie #3
 #include <iostream>
 using namespace std;
 
-struct Perfomance {
-	int mark;
-};
-
-struct Student {
+struct student
+{
+	char name[10];
 	char surname[15];
-	char name[15];
-	char patronymic[15];
 	int age;
-	int degree;
-	Perfomance marks[3];
+	int course;
+	int mark_math;
+	int mark_physics;
+	int mark_biology;
 };
+student read()
+{
+	student s;
+	cout << "Name: ";
+	cin >> s.name;
+	cout << "Surname: ";
+	cin >> s.surname;
+	cout << "Age: ";
+	cin >> s.age;
+	cout << "Course: ";
+	cin >> s.course;
+	cout << "Math: ";
+	cin >> s.mark_math;
+	cout << "Physics: ";
+	cin >> s.mark_physics;
+	cout << "Biology: ";
+	cin >> s.mark_biology;
+	return s;
+}
+void StudentInfo(student s)
+{
+	cout << "Full name : " << s.name << " " << s.surname << endl;
+	cout << "Age : " << s.age << endl;
+	cout << "Course : " << s.course << endl;
+	cout << "Math mark : " << s.mark_math << endl;
+	cout << "Physics mark : " << s.mark_physics << endl;
+	cout << "Biology mark : " << s.mark_biology << endl;
+	cout << "__________________" << endl << endl;
+}
+void OutputStudent()
+{
+	const int n = 3;
+	int amountMath, amountPhysics, amountBiology = 0;
+	student arr[n];
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = read();
+	}
+	for (int i = 0; i < n; i++)
+	{
+		StudentInfo(arr[i]);
+	}
 
-void input(Student*student, int n) {
-		for (int i = 0; i < n; i++) {
-			cout << "Student #" << i + 1 << " : " << endl;
-			cout << "  -Input surname of student : "; cin >> student[i].surname;
-			cout << "  -Input name of student : "; cin >> student[i].name;
-			cout << "  -Input patronymic of student : "; cin >> student[i].patronymic;
-			cout << "  -Input the age of " << student[i].surname <<" "<< student[i].name<<" "<< student[i].patronymic << " : "; cin >> student[i].age;
-			cout << "  -Input the number of degree for " << student[i].surname << " " << student[i].name << " " << student[i].patronymic << " : "; cin >> student[i].degree;
-			cout << "  -Input the marks of " << student[i].surname << " " << student[i].name << " " << student[i].patronymic << endl;
-			for (int k = 0; k < 3; k++) {
-				cout << k+1 << " mark : "; cin >> student[i].marks[k].mark;
+
+	for (int j = 0; j < 4; j++)
+	{
+		amountMath = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (arr[i].course == j + 1)
+			{
+				if (arr[i].mark_math < 4)
+				{
+					amountMath++;
+				}
 			}
 		}
-};
-
-double averageMark(Student*student, int n,int course) {
-	
-	double averageAnswer=0;
-	int k = 0;
-	
-	for (int i = 0; i < n; i++) {
-		double averageSum = 0;
-		if (student[i].degree == course) {
-			k++;
-			for (int k = 0; k < 3; k++) { averageSum += student[i].marks[k].mark; }
-			averageSum /= 3.0;
-		}
-		averageAnswer += averageSum;
+		cout << "Amount of lowskill students of " << j + 1 << " course at math: " << amountMath << endl;
 	}
-	if (k==0) { return averageAnswer; }
-		averageAnswer /= k;
-		return averageAnswer;
+	cout << endl;
+	for (int j = 0; j < 4; j++)
+	{
+		amountPhysics = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (arr[i].course == j + 1)
+			{
+				if (arr[i].mark_physics < 4)
+				{
+					amountPhysics++;
+				}
+			}
+		}
+		cout << "Amount of lowskill students of " << j + 1 << " course at physics: " << amountPhysics << endl;
+	}
+	cout << endl;
+	for (int j = 0; j < 4; j++)
+	{
+		amountBiology = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (arr[i].course == j + 1)
+			{
+				if (arr[i].mark_biology < 4)
+				{
+					amountBiology++;
+				}
+			}
+		}
+		cout << "Amount of lowskill students of " << j + 1 << " course at biology: " << amountBiology << endl;
+	}
+	cout << endl;
 }
 
-int main() {
-	int n;
-	cout << "Input cout of students : "; cin >> n;
-	Student*student;
-	student = new Student[n];
+int main()
+{
+	OutputStudent();
 
-	input(student, n);
+	cout << endl;
 
-	int course;
-	cout << "Input the number of degree to find average mark : "; cin >> course;
-	if (averageMark(student, n, course) == 0) cout << "No students on this degree ." << endl; 
-	else { cout << "Average mark for students of " << course << " course = " << averageMark(student, n, course) << endl; }
 	system("pause");
 	return 0;
 }
+
