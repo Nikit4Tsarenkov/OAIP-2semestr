@@ -121,6 +121,9 @@ int main()
 Zadanie #3
 
 
+// lab2.cpp : Defines the entry point for the console application.
+//
+#include <stdafx.h>
 #include <iostream>
 using namespace std;
 
@@ -145,12 +148,6 @@ student read()
 	cin >> s.age;
 	cout << "Course: ";
 	cin >> s.course;
-	cout << "Math: ";
-	cin >> s.mark_math;
-	cout << "Physics: ";
-	cin >> s.mark_physics;
-	cout << "Biology: ";
-	cin >> s.mark_biology;
 	return s;
 }
 void StudentInfo(student s)
@@ -158,15 +155,12 @@ void StudentInfo(student s)
 	cout << "Full name : " << s.name << " " << s.surname << endl;
 	cout << "Age : " << s.age << endl;
 	cout << "Course : " << s.course << endl;
-	cout << "Math mark : " << s.mark_math << endl;
-	cout << "Physics mark : " << s.mark_physics << endl;
-	cout << "Biology mark : " << s.mark_biology << endl;
 	cout << "__________________" << endl << endl;
 }
 void OutputStudent()
 {
 	const int n = 3;
-	int amountMath, amountPhysics, amountBiology = 0;
+	int avarageAge = 0;
 	student arr[n];
 	for (int i = 0; i < n; i++)
 	{
@@ -180,52 +174,17 @@ void OutputStudent()
 
 	for (int j = 0; j < 4; j++)
 	{
-		amountMath = 0;
+		avarageAge = 0;
 		for (int i = 0; i < n; i++)
 		{
 			if (arr[i].course == j + 1)
 			{
-				if (arr[i].mark_math < 4)
-				{
-					amountMath++;
-				}
+				
 			}
 		}
-		cout << "Amount of lowskill students of " << j + 1 << " course at math: " << amountMath << endl;
+		cout << " Avarage age at " << j + 1 << " course  " << avarageAge << endl;
+		cout << endl;
 	}
-	cout << endl;
-	for (int j = 0; j < 4; j++)
-	{
-		amountPhysics = 0;
-		for (int i = 0; i < n; i++)
-		{
-			if (arr[i].course == j + 1)
-			{
-				if (arr[i].mark_physics < 4)
-				{
-					amountPhysics++;
-				}
-			}
-		}
-		cout << "Amount of lowskill students of " << j + 1 << " course at physics: " << amountPhysics << endl;
-	}
-	cout << endl;
-	for (int j = 0; j < 4; j++)
-	{
-		amountBiology = 0;
-		for (int i = 0; i < n; i++)
-		{
-			if (arr[i].course == j + 1)
-			{
-				if (arr[i].mark_biology < 4)
-				{
-					amountBiology++;
-				}
-			}
-		}
-		cout << "Amount of lowskill students of " << j + 1 << " course at biology: " << amountBiology << endl;
-	}
-	cout << endl;
 }
 
 int main()
@@ -234,7 +193,6 @@ int main()
 
 	cout << endl;
 
-	system("pause");
 	return 0;
 }
 
