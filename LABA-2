@@ -93,7 +93,7 @@ void print(complex cmp)
 	cout << "Complex number: Z=" << cmp.re << sign << abs(cmp.im) << 'i' << endl;
 }
 
-void add(complex a, complex b)
+complex add(complex a, complex b)
 {
 	float sum_re, sum_im;
 	sum_re = (a.re + b.re); sum_im = (a.im + b.im);
