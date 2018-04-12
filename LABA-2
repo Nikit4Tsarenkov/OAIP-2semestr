@@ -120,10 +120,6 @@ int main()
 
 Zadanie #3
 
-
-// lab2.cpp : Defines the entry point for the console application.
-//
-#include <stdafx.h>
 #include <iostream>
 using namespace std;
 
@@ -133,66 +129,57 @@ struct student
 	char surname[15];
 	int age;
 	int course;
-	int mark_math;
-	int mark_physics;
-	int mark_biology;
+	void input();
+
+	void output();
+
 };
-student read()
+
+void student::input()
 {
-	student s;
 	cout << "Name: ";
-	cin >> s.name;
+	cin >> name;
 	cout << "Surname: ";
-	cin >> s.surname;
+	cin >> surname;
 	cout << "Age: ";
-	cin >> s.age;
+	cin >> age;
 	cout << "Course: ";
-	cin >> s.course;
-	return s;
+	cin >> course;
+	
 }
-void StudentInfo(student s)
+void student::output()
 {
-	cout << "Full name : " << s.name << " " << s.surname << endl;
-	cout << "Age : " << s.age << endl;
-	cout << "Course : " << s.course << endl;
+	cout << "Full name : " << name << " " << surname << endl;
+	cout << "Age : " << age << endl;
+	cout << "Course : " << course << endl;
 	cout << "__________________" << endl << endl;
-}
-void OutputStudent()
-{
-	const int n = 3;
-	int avarageAge = 0;
-	student arr[n];
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = read();
-	}
-	for (int i = 0; i < n; i++)
-	{
-		StudentInfo(arr[i]);
-	}
-
-
-	for (int j = 0; j < 4; j++)
-	{
-		avarageAge = 0;
-		for (int i = 0; i < n; i++)
-		{
-			if (arr[i].course == j + 1)
-			{
-				
-			}
-		}
-		cout << " Avarage age at " << j + 1 << " course  " << avarageAge << endl;
-		cout << endl;
-	}
 }
 
 int main()
 {
-	OutputStudent();
-
+	int qua = 3;
+	student*list = new student[qua];
+	for (int i = 0; i < qua; i++){
+		list[i].input();
+    			}
 	cout << endl;
 
+	for (int i = 0; i < qua; i++) {
+		list[i].output();
+	}
+
+	int choice;
+	cout << "Input course u want to know avarege age: "; cin >> choice;
+	int count = 0;
+	double average = 0;
+	for (int i = 0; i < qua; i++)
+	{
+		if (list[i].course == choice) {
+			average += list[i].age;
+			count++;
+		}
+	}
+	average /= count;
+	cout << "Average age on course " << choice << " is " << average;
 	return 0;
 }
-
