@@ -72,51 +72,40 @@ Zadanie #2
 #include <iostream>
 using namespace std;
 
-struct complex
-{
+struct complex {
 	float re;
 	float im;
 };
 
-complex read()
-{
-	complex a;
-	cout << "Input Real part : "; cin >> a.re; cout << endl;
-	cout << "Input Imagine part : "; cin >> a.im; cout << endl;
-	return a;
+complex read() {
+	complex x;
+	cout << "Input re of number: "; cin>>x.re;
+	cout << "Input im of number: "; cin >> x.im;
+	return x;
+}
+void print(complex s) {
+	cout << s.re << " + " << s.im << "i"<< endl;
 }
 
-void print(complex cmp)
-{
-	char sign = '+';
-	if (cmp.im < 0) sign = '-';
-	cout << "Complex number: Z=" << cmp.re << sign << abs(cmp.im) << 'i' << endl;
+complex add(complex a, complex b) {
+	complex x;
+	x.im = a.im + b.im;
+	x.re = a.re + b.re;
+	return x;
 }
 
-complex add(complex a, complex b)
-{
-	float sum_re, sum_im;
-	sum_re = (a.re + b.re); sum_im = (a.im + b.im);
-	char sign = '+';
-	if (sum_im < 0) sign = ' ';
-	cout << "Sum = " << sum_re << sign << sum_im << 'i' << endl;
-}
-
-
-int main()
-{
-	complex a, b;
-	a = read();
-	b = read();
-	print(a);
-	print(b);
-	add(a, b);
-
-
+int main() {
+	complex z1, z2;
+	z1 = read();
+	z2 = read();
+	cout << "z1 = "; print(z1);
+	cout << "z2 = "; print(z2);
+	cout << "-----------\n";
+	complex z3= add(z1,z2);
+	cout << "z1 + z2 = "; print(z3);
 	system("pause");
-	return 0;
+	return 0;	
 }
-
 
 Zadanie #3
 
