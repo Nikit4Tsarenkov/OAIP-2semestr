@@ -1,0 +1,238 @@
+#include<iostream>
+#include<iomanip> 
+#include<string.h>
+using namespace std;
+
+struct price
+{
+	int n;
+	price();
+
+	~price() {};
+
+	int product_id;
+	char product_name[30];
+	char shop[30];
+	int cost;
+	int quantity;
+
+	void outputDataOfProduct()
+	{
+		cout.width(15); cout << product_id << setw(25) << product_name << setw(20) << shop << setw(13) << cost << setw(20) << quantity << endl;
+		cout << "_______________________________________________________________________________________________________________________" << endl;
+	}
+
+	void read_data_of_product()
+	{
+
+
+		cout << "Enter a product id:"; cin >> product_id;
+		cout << "Input a product name:"; cin.getline(product_name, 30);
+		cin.get(product_name, 30);
+		cout << "Input a shop:"; cin.getline(shop, 30);
+		cin.get(shop, 30);
+		cout << "Input a cost:"; cin >> cost;
+		cout << "Input a quantity of product:"; cin >> quantity;
+		cout << endl; cout << "___________________________" << endl;
+
+	}
+};
+
+price::price()
+{
+	product_id = 0;
+	cost = 0;
+	quantity = 0;
+
+};
+
+void createTable()
+{
+	cout << endl;
+	cout << "	product id" << "	|	";
+	cout << "product name" << "	|	";
+	cout << "shop" << "	|	";
+	cout << "cost" << "	|	";
+	cout << "quantity of product";
+	cout << endl;
+	cout.fill('_');
+	cout.width(120);
+	cout << ' ' << endl; cout.fill(' ');
+
+}
+
+void readDataOfAllProduct(int *n, price A[])
+{
+
+	for (int i = 0; i < *n; i++)
+	{
+		A[i].read_data_of_product();
+
+
+	}
+}
+
+void outputDataOfAllProducts(int *n, price A[])
+{
+
+	createTable();
+	for (int i = 0; i < *n; i++)
+	{
+		A[i].outputDataOfProduct();
+	}
+	cout << endl;
+}
+
+void sortingByCost(int *n, price A[])
+{
+	for (int i = 0; i <*n - 1; i++)
+
+		for (int j = 0; j <*n - i - 1; j++)
+		{
+			if (A[j].cost > A[j + 1].cost)
+			{
+				price temp = A[j];
+				A[j] = A[j + 1];
+				A[j + 1] = temp;
+			}
+
+		}
+}
+
+void sortingByShop(int *n, price A[])
+{
+	for (int i = 0; i < *n - 1; i++)
+
+		for (int j = 0; j < *n - i - 1; j++)
+		{
+			if (_stricmp(A[j].shop, A[j + 1].shop)>0)
+
+			{
+				price temp = A[j];
+				A[j] = A[j + 1];
+				A[j + 1] = temp;
+			}
+			if (_stricmp(A[j].shop, A[j + 1].shop) == 0) continue;
+		}
+}
+
+int searchById(int id, int *n, price A[])
+{
+	int index; bool flag = false;
+
+	for (int i = 0; i < *n; i++)
+	{
+		if (A[i].product_id == id)
+		{
+			flag = true;
+			index = i;
+
+			break;
+		}
+
+
+
+	}
+
+	if (flag)
+	{
+
+		return index;
+	}
+	else
+
+		return (-1);
+}
+
+void lessThenFive(int *n, price A[])
+{
+	price f;
+	bool flag = false;
+	for (int i = 0; i < *n; i++)
+	{
+		if (A[i].quantity < 5)
+		{
+
+			A[i].outputDataOfProduct();
+			flag = true;
+		}
+	}
+	if (!flag)
+		cout << "There are no elements whose quantity is less than 5! " << endl;
+}
+
+void editInfoAboutProduct(int id, int *n, price A[])
+{
+	if ((searchById(id, n, A)) == -1)
+	{
+		A[id - 1].read_data_of_product();
+		*n = id;
+	}
+	else
+		A[searchById(id, n, A)].read_data_of_product();
+
+}
+
+void menu()
+{
+	cout << "[1]Input products " << endl;
+	cout << "[2]Output info about all products " << endl;
+	cout << "[3]Sorting in ascending by cost " << endl;
+	cout << "[4]Output info about all products sorting by shops " << endl;
+	cout << "[5]Find products by ID " << endl;
+	cout << "[6]Output info about products which quantity less five " << endl;
+	cout << "[7]Editing information about the product (search by ID). " << endl;
+	cout << "[8]END THE PROGRAMM " << endl;
+}
+
+int main()
+{
+
+	int button = 0, count = 0, n = 5, k = 0;
+	price *A = new price[n];
+	int id;
+
+
+	while (button != 8)
+	{
+		menu();
+
+
+		{
+
+			if ((button < 0) || (button > 8))
+				cout << "Invalid input,try again..." << endl;
+			cin >> button;
+		} while (button < 0 || button>8);
+
+
+		switch (button)
+		{
+		case 1:
+			cout << "Enter the number of products to input:  "; cin >> n;
+			readDataOfAllProduct(&n, A); break;
+		case 2:outputDataOfAllProducts(&n, A); break;
+		case 3:sortingByCost(&n, A); break;
+		case 4:sortingByShop(&n, A); break;
+		case 5:
+			cout << "Enter ID of product: "; cin >> id;
+			if ((searchById(id, &n, A)) == -1) cout << "Not found" << endl;
+			else
+			{
+				createTable();
+				A[searchById(id, &n, A)].outputDataOfProduct();
+				break;
+			}
+		case 6:
+			createTable();
+			lessThenFive(&n, A); break;
+		case 7:
+			cout << "Enter ID of product: "; cin >> id;
+			editInfoAboutProduct(id, &n, A); break;
+		case 8: return 0;
+		}
+		cout << endl;
+	}
+
+	return 0;
+}
