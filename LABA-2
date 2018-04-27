@@ -173,7 +173,7 @@ int main()
 	{
 		cout << "Average age on course " << choice << " is " << average << endl;
 	}
-	else cout << "There's no students on this course " << endl;
+	else cout << "There are no students on this course " << endl;
 	system("pause");
 	return 0;
 }
