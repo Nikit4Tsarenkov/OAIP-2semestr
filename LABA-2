@@ -134,7 +134,7 @@ void student::input()
 	cin >> age;
 	cout << "Course: ";
 	cin >> course;
-	
+
 }
 void student::output()
 {
@@ -150,7 +150,7 @@ int main()
 	student*list = new student[qua];
 	for (int i = 0; i < qua; i++){
 		list[i].input();
-    			}
+	}
 	cout << endl;
 
 	for (int i = 0; i < qua; i++) {
@@ -169,6 +169,11 @@ int main()
 		}
 	}
 	average /= count;
-	cout << "Average age on course " << choice << " is " << average;
+	if (average > 0)
+	{
+		cout << "Average age on course " << choice << " is " << average << endl;
+	}
+	else cout << "There's no students on this course " << endl;
+	system("pause");
 	return 0;
 }
