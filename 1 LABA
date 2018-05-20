@@ -1,0 +1,17 @@
+#3 
+#include<iostream> 
+using namespace std; 
+
+int main() { 
+int num=2; 
+int n; 
+cout « "Input n: "; 
+cin » n; 
+num = num « (n - 1); 
+cout « "2^"«n«" = "«num « endl; 
+system("pause"); 
+return 0; 
+}
+
+
+#6
