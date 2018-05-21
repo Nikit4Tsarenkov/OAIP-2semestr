@@ -12,161 +12,145 @@ struct Price {
 	char shopName[20];
 	int cost;
 	int stockUnits;
-	
+
 };
-	void Price :: input(Price*product,int n) {
-			cout << "  -Input product ID : "; 
-				int check;
-				do {
-					check = 0;
-				cin >> productID; 
-				for (int i = 0; i < n; i++) { if (productID != product[i].productID){ check++; }; }
-				if (check != n - 1) { cout << "Such ID is already engaged. Try again." << endl; }
-			} while (check!=n-1);
-			cout << "  -Input name of product : "; cin >> name;
-			cout << "  -Input name of shop : "; cin >> shopName;
-			cout << "  -Input the price of " << name << " : "; cin >>cost;
-			cout << "  -Input units of " << name << " in the stock : "; cin >> stockUnits;
-	};
-	void  output(Price*product, int n) {
-		cout << setw(10) << "" << setw(10) << "ID" << setw(15) << "Product name" << setw(15) << "Shop name" << setw(10) << "Price" << setw(20) << "Units in stock" << endl;
-		for (int i = 0; i < n; i++) {
-			cout << setw(10) << "Product #" << i+1 << setw(10) << product[i].productID << setw(15) << product[i].name << setw(15) << product[i].shopName << setw(10) << product[i].cost << setw(10) << product[i].stockUnits << endl;
-		}
-	};
-	void sort(Price*product, int n) {
-		for (int i = 0; i < n; i++) {
-			for (int k = i + 1; k < n; k++) 
-			  { if (product[k].cost < product[i].cost) {
-				Price save = product[k]; 
-				product[k]=product[i];
+void Price::input(Price*product, int n) {
+	cout << "  -Input product ID : ";
+	int check;
+	do {
+		check = 0;
+		cin >> productID;
+		for (int i = 0; i < n; i++) { if (productID != product[i].productID) { check++; }; }
+		if (check != n - 1) { cout << "Such ID is already engaged. Try again." << endl; }
+	} while (check != n - 1);
+	cout << "  -Input name of product : "; cin >> name;
+	cout << "  -Input name of shop : "; cin >> shopName;
+	cout << "  -Input the price of " << name << " : "; cin >> cost;
+	cout << "  -Input units of " << name << " in the stock : "; cin >> stockUnits;
+};
+void  output(Price*product, int n) {
+	cout << setw(10) << "" << setw(10) << "ID" << setw(15) << "Product name" << setw(15) << "Shop name" << setw(10) << "Price" << setw(20) << "Units in stock" << endl;
+	for (int i = 0; i < n; i++) {
+		cout << setw(10) << "Product #" << i + 1 << setw(10) << product[i].productID << setw(15) << product[i].name << setw(15) << product[i].shopName << setw(10) << product[i].cost << setw(10) << product[i].stockUnits << endl;
+	}
+};
+void sort(Price*product, int n) {
+	for (int i = 0; i < n; i++) {
+		for (int k = i + 1; k < n; k++)
+		{
+			if (product[k].cost < product[i].cost) {
+				Price save = product[k];
+				product[k] = product[i];
 				product[i] = save;
 			}
-			}
-		};
-		cout << "______________________________________________" << endl;
-		cout << "Sucess." << endl;
-		cout << "______________________________________________" << endl;
+		}
 	};
-	void shopGroup(Price*product, int n) {
-	/*	Price sort;
-		for (int i = 0; i < n; i++)
+	cout << "______________________________________________" << endl;
+	cout << "Sucess." << endl;
+	cout << "______________________________________________" << endl;
+};
+void shopGroup(Price*product, int n) {
+	
+	Price sort;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
 		{
-			for (int j = i + 1; j < n; j++)
-			{
-				for (int k = 0; k < 20; k++)
-				{
-					if (product[i].shopName[k] > product[j].shopName[k])
-					{
-						sort = product[j];
-						product[j] = product[i];
-						product[i] = sort;
-						break;
-					}
-					break;
-				}
+			if (strcmp(product[i].shopName, product[j].shopName) == 0) {
+				sort = product[i + 1];
+				product[i + 1] = product[j];
+				product[j] = sort;
 			}
-		}*/
-		Price sort;
-		for (int i = 0; i < n; i++)
-		{
-			for (int j = i + 1; j < n; j++)
-			{
-				if (strcmp(product[i].shopName, product[j].shopName) == 0) { 
-					sort = product[i+1];
-					product[i + 1] = product[j];
-					product[j] = sort;
-				}
-				}
-			}
-		for (int i = 0; i < n; i++)
-		{
-			for (int j = i + 1; j < n; j++)
-			{
-				if (strcmp(product[i].shopName, product[j].shopName) == 0) { for (int k = 0; k < 20; k++) { product[j].shopName[k] = ' '; }; product[j].shopName[20] = '\0'; }
-				}
-			}
-		cout << setw(20) << "Shop name"<< setw(10) << "" << setw(10) << "ID" << setw(15) << "Product name"  << setw(10) << "Price" << setw(20) << "Units in stock" << endl;
-		
-		for (int i = 0; i < n; i++) {	
-			cout<< setw(20) << product[i].shopName << setw(10) << "Product #" << i + 1 << setw(10) << product[i].productID << setw(15) << product[i].name  << setw(10) << product[i].cost << setw(10) << product[i].stockUnits << endl;
 		}
 	}
-	void idFind(Price*product, int n, int k) {
-		int check = 0;
-		for (int i = 0; i < n; i++) {
-			if (product[i].productID == k) {
-				cout << "______________________________________________" << endl;
-				cout << "ID : " << product[i].productID << endl;
-				cout << "Product : " << product[i].name << endl; 
-				cout << "Shop name : " << product[i].shopName << endl;
-				cout << "Price : " << product[i].cost << endl;
-				cout<<"Units in stock : "<< product[i].stockUnits << endl;
-				cout << "______________________________________________" << endl;
-				check++;
-				break;
-			}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (strcmp(product[i].shopName, product[j].shopName) == 0) { for (int k = 0; k < 20; k++) { product[j].shopName[k] = ' '; }; product[j].shopName[20] = '\0'; }
 		}
-		if (check == 0) { cout << "No products with such ID. " << endl; }
 	}
-	void stockFind(Price*product, int n, int k) {
+	cout << setw(20) << "Shop name" << setw(10) << "" << setw(10) << "ID" << setw(15) << "Product name" << setw(10) << "Price" << setw(20) << "Units in stock" << endl;
 
-		int check = 0;
-		for (int i = 0; i < n; i++) {
-			if (product[i].stockUnits < k) {
-				cout << "______________________________________________" << endl;
-				cout << "ID : " << product[i].productID << endl;
-				cout << "Product : " << product[i].name << endl;
-				cout << "Shop name : " << product[i].shopName << endl;
-				cout << "Price : " << product[i].cost << endl;
-				cout << "Units in stock : " << product[i].stockUnits << endl;
-				cout << "______________________________________________" << endl;
-				check++;
-
-			}
+	for (int i = 0; i < n; i++) {
+		cout << setw(20) << product[i].shopName << setw(10) << "Product #" << i + 1 << setw(10) << product[i].productID << setw(15) << product[i].name << setw(10) << product[i].cost << setw(10) << product[i].stockUnits << endl;
+	}
+}
+void idFind(Price*product, int n, int k) {
+	int check = 0;
+	for (int i = 0; i < n; i++) {
+		if (product[i].productID == k) {
+			cout << "______________________________________________" << endl;
+			cout << "ID : " << product[i].productID << endl;
+			cout << "Product : " << product[i].name << endl;
+			cout << "Shop name : " << product[i].shopName << endl;
+			cout << "Price : " << product[i].cost << endl;
+			cout << "Units in stock : " << product[i].stockUnits << endl;
+			cout << "______________________________________________" << endl;
+			check++;
+			break;
 		}
-		if (check == 0) { cout << "No products , which units less than " <<k << endl; }
-
 	}
-	void edit(Price*product, int n, int id) {
-		for (int i = 0; i < n; i++) {
-			if (product[i].productID == id) {
-				int choise;
-				cout << "Product ID is : " << id << endl << "********" << endl;;
-					cout << "Product name : " << product[i].name << endl;
-						cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
-							if (choise == 1) { cout << "New product name : "; cin >> product[i].name; }
-					cout << "Shop name : " << product[i].shopName << endl;
-						cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
-							if (choise == 1) { cout << "New shop name : "; cin >> product[i].shopName; }
-					cout << "Product price : " << product[i].cost << endl;
-						cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
-							if (choise == 1) { cout << "New product price : "; cin >> product[i].cost; }
-					cout << "Product units in stock : " << product[i].stockUnits << endl;
-						cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
-							if (choise == 1) { cout << "New product stock units : "; cin >> product[i].stockUnits; }
+	if (check == 0) { cout << "No products with such ID. " << endl; }
+}
+void stockFind(Price*product, int n, int k) {
+
+	int check = 0;
+	for (int i = 0; i < n; i++) {
+		if (product[i].stockUnits < k) {
+			cout << "______________________________________________" << endl;
+			cout << "ID : " << product[i].productID << endl;
+			cout << "Product : " << product[i].name << endl;
+			cout << "Shop name : " << product[i].shopName << endl;
+			cout << "Price : " << product[i].cost << endl;
+			cout << "Units in stock : " << product[i].stockUnits << endl;
+			cout << "______________________________________________" << endl;
+			check++;
+
+		}
+	}
+	if (check == 0) { cout << "No products , which units less than " << k << endl; }
+
+}
+void edit(Price*product, int n, int id) {
+	for (int i = 0; i < n; i++) {
+		if (product[i].productID == id) {
+			int choise;
+			cout << "Product ID is : " << id << endl << "********" << endl;;
+			cout << "Product name : " << product[i].name << endl;
+			cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
+			if (choise == 1) { cout << "New product name : "; cin >> product[i].name; }
+			cout << "Shop name : " << product[i].shopName << endl;
+			cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
+			if (choise == 1) { cout << "New shop name : "; cin >> product[i].shopName; }
+			cout << "Product price : " << product[i].cost << endl;
+			cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
+			if (choise == 1) { cout << "New product price : "; cin >> product[i].cost; }
+			cout << "Product units in stock : " << product[i].stockUnits << endl;
+			cout << "Input 0 to leave as is, 1 to change :"; cin >> choise;
+			if (choise == 1) { cout << "New product stock units : "; cin >> product[i].stockUnits; }
 			cout << "______________________________________________" << endl;
 			cout << "Sucess." << endl;
 			cout << "______________________________________________" << endl;
 			break;
-			}
-			
 		}
-	}
-	int main() {
 
-		int n;
-		cout << "Input cout of products : "; cin >> n;
-		cout << "We have " << n << " products : " << endl;
-		Price*product;
-		product = new Price[n];
-		for (int i = 0; i < n; i++) {
-			cout << "Product #" << i + 1 << " : " << endl;
-			product[i].input(product,n);
-		}
-		int choose;
-		do {
-			cout <<endl << endl;
+	}
+}
+int main() {
+
+	int n;
+	cout << "Input cout of products : "; cin >> n;
+	cout << "We have " << n << " products : " << endl;
+	Price*product;
+	product = new Price[n];
+	for (int i = 0; i < n; i++) {
+		cout << "Product #" << i + 1 << " : " << endl;
+		product[i].input(product, n);
+	}
+	int choose;
+	do {
+		cout << endl << endl;
 		cout << "Select a function from the suggested options:" << endl;
 		cout << "0 to quit ;" << endl;
 		cout << "1 - output information about all products in a table;" << endl;
@@ -176,42 +160,42 @@ struct Price {
 		cout << "5 - find information about products, units in stock of which is less than [n] ;" << endl;
 		cout << "6 - editing information about the product (search by ID)." << endl;
 		cout << "Select : ";
-			cin >> choose;
-			switch (choose) {
-			case 1: {
-				output(product, n);
-				break;
-			}
-			case 2: {
-				sort(product, n);
-				break;
-			}
-			case 3: {
-				shopGroup(product,n);
-				break;
-			}
-			case 4: {
-				int id;
-				cout << "Input ID of product to find : "; cin >> id;
-				idFind(product, n, id);
-				break;
-			}
-			case 5: {
-				int stock;
-				cout << "Input [n], to find information about products, which units in stock less than [n] :"; cin >> stock;
-				stockFind(product, n, stock);
-				break;
-			}
-			case 6: {
-				int id;
-				cout << "Input ID of product to edit information : "; cin >> id;
-					edit(product, n, id);
-				break;
-			}default: { };
-			}
-		
-		} while (choose != 0);
-		
+		cin >> choose;
+		switch (choose) {
+		case 1: {
+			output(product, n);
+			break;
+		}
+		case 2: {
+			sort(product, n);
+			break;
+		}
+		case 3: {
+			shopGroup(product, n);
+			break;
+		}
+		case 4: {
+			int id;
+			cout << "Input ID of product to find : "; cin >> id;
+			idFind(product, n, id);
+			break;
+		}
+		case 5: {
+			int stock;
+			cout << "Input [n], to find information about products, which units in stock less than [n] :"; cin >> stock;
+			stockFind(product, n, stock);
+			break;
+		}
+		case 6: {
+			int id;
+			cout << "Input ID of product to edit information : "; cin >> id;
+			edit(product, n, id);
+			break;
+		}default: { };
+		}
+
+	} while (choose != 0);
+
 	system("pause");
 	return 0;
 }
