@@ -15,3 +15,18 @@ return 0;
 
 
 #6
+#include<iostream> 
+using namespace std; 
+
+int main()  
+{
+	int A, i;
+	cout << "Enter A ";
+	cin >> A;
+	cout << "Enter i ";
+	cin >> i;
+
+	A = (A | (1 << i)) ^ (1 << i);
+
+	cout << A << endl;
+}
